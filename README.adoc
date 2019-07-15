@@ -1,4 +1,6 @@
-# Rusted realms
+= Rusted realms
+
+image:https://travis-ci.org/Orchaldir/rusted-realms.svg?branch=master[Build Status,link=https://travis-ci.org/Orchaldir/rusted-realms]
 
 A fantasy 4x game with rust
 
