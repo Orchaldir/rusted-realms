@@ -1,0 +1,7 @@
+[package]
+name = "rusted_battle"
+version = "0.1.0"
+authors = ["Orchaldir <orchaldir@gmail.com>"]
+edition = "2018"
+
+[dependencies]
