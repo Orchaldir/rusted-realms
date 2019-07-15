@@ -1,0 +1,5 @@
+# Rusted realms
+
+A fantasy 4x game with rust
+
+See link:docs/adr/index.adoc[Architectural Decision Records].

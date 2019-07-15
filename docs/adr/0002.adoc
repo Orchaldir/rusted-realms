@@ -1,0 +1,10 @@
+= ADR 0002 - Use Test Driven Development
+
+*Status:* accepted
+
+*Date:* 2019-07-15
+
+== Links
+
+* https://doc.rust-lang.org/book/ch11-00-testing.html[The Rust Programming Language]
+* https://doc.rust-lang.org/rust-by-example/testing.html[Rust By Example]
