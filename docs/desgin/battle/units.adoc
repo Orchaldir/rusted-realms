@@ -1,0 +1,25 @@
+= Units
+
+== Unit Types
+
+* artillery
+* beasts
+** packs of wolves, bears, or great cats
+* cavalry
+* characters
+* chariots
+* giant monsters
+* infantry
+* teams
+** military squads or adventure parties
+
+== Formations
+
+* skirmish formation
+** no pattern, but min distance
+* open formation
+** regular grid with gaps
+* closed formation
+** regular grid without gaps
+* shield wall
+* set spears
