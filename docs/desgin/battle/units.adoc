@@ -12,6 +12,9 @@
 * infantry
 * teams
 ** military squads or adventure parties
+* vehicles
+** need a crew
+** can have passengers
 
 == Formations
 
@@ -23,3 +26,21 @@
 ** regular grid without gaps
 * shield wall
 * set spears
+
+== Movement
+
+* flying
+* hovering
+* riding
+* walking
+* wheeled
+
+== Equipment
+
+=== Weapons
+
+* ???
+
+=== Armor
+
+* ???

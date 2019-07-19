@@ -1,5 +1,4 @@
 = Battle
 
-== Units
-
-See link:units.adoc[Units].
+* See link:battlefield.adoc[Battlefield].
+* See link:units.adoc[Units].

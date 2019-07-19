@@ -1,0 +1,33 @@
+= Battlefield
+
+== Terrain
+
+* desert
+* forest
+* lake or ocean
+* river
+
+== Obstacles
+
+* stakes
+* fences
+* palisades
+* trenches
+* walls
+
+== Buildings
+
+* ???
+
+== Lighting
+
+* daylight
+* twilight
+* night
+* no light
+
+== Weather
+
+* fog
+* rain
+* snow
