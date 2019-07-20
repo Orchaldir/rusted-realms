@@ -1,0 +1,13 @@
+= Programming
+
+== Are units & objects aligned to the grid?
+
+=== Advantages
+
+* simpler code
+* faster computation
+
+=== Disadvantages
+
+* limits movement options
+* looks worse
