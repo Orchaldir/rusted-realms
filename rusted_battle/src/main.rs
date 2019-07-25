@@ -1,21 +1,23 @@
 #[derive(Debug)]
 struct Character {
-    fighting: i32
+    fighting: i32,
+    strength: i32
 }
 
 #[derive(Debug)]
 enum AttackResult {
-    Hit(i32),
+    Hit {damage: i32},
     Miss,
 }
 
 impl Character {
 
     fn attack(self, target: Character) -> AttackResult {
-        let margin_of_success = self.fighting - target.fighting;
+        let diff = self.fighting - target.fighting;
 
-        if margin_of_success > 0 {
-            AttackResult::Hit(margin_of_success)
+        if diff > 0 {
+            let damage = diff + self.strength;
+            AttackResult::Hit {damage }
         } else {
             AttackResult::Miss
         }
@@ -23,10 +25,15 @@ impl Character {
 }
 
 fn main() {
-    let character0 = Character { fighting: 6};
-    let character1 = Character { fighting: 5};
+    let character0 = Character { fighting: 6, strength: 3 };
+    let character1 = Character { fighting: 5, strength: 8 };
 
     let result = character0.attack(character1);
 
     println!("Result: {:?}", result);
+
+    match result {
+        AttackResult::Hit {damage} => println!("A hit with {} damage!", damage),
+        AttackResult::Miss => println!("A miss :(")
+    }
 }
