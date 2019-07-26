@@ -1,0 +1,29 @@
+= Combat
+
+== Modifiers
+
+=== Distance
+
+abc
+
+=== Cover
+
+* no cover
+* light cover
+* medium cover
+* heavy cover
+* total cover
+
+=== Concealment
+
+* no concealment
+* light concealment
+* medium concealment
+* heavy concealment
+* total concealment
+
+Calculated from:
+
+* link:battlefield.adoc#Lighting[Lighting]
+* Camouflage, Invisibility & Stealth
+* link:battlefield.adoc#Weather[Weather]
