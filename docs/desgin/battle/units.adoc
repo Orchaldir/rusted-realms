@@ -1,12 +1,29 @@
 = Units
 
-== Stats
+== Skills
 
 * Fighting
 * Strength
 * Damage
 * Toughness
 * Armour
+
+=== Ranks
+
+* average child
+* average teenager
+* average adult
+* above average
+* among the best in a village
+* among the best in a town
+* among the best in a city/province
+* among the best in a nation
+* among the best on a continent
+* among the best in the world
+* among the best ever
+* low supernatural
+* moderate supernatural
+* high supernatural
 
 == Unit Types
 
