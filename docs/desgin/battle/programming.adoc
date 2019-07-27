@@ -11,3 +11,16 @@
 
 * limits movement options
 * looks worse
+
+== Classes
+
+* action
+** Attack
+* battlefield
+** enum Cover
+** enum Concealment
+* unit
+** skill
+*** class Check
+*** enum Result
+** class Unit
