@@ -1,6 +1,6 @@
 mod unit;
 
-use unit::skill::Checker;
+use unit::skill::*;
 
 #[derive(Debug)]
 struct Character {
@@ -17,19 +17,18 @@ enum AttackResult {
 impl Character {
 
     fn attack(self, target: Character, checker: Checker) -> AttackResult {
-        let diff = checker.check(self.fighting, target.fighting);
-
-        if diff > 0 {
-            let damage = diff + self.strength;
-            AttackResult::Hit {damage }
-        } else {
-            AttackResult::Miss
+        match checker.check(self.fighting, target.fighting) {
+            CheckResult::Success {degree} => {
+                let damage = self.strength * degree as i32;
+                AttackResult::Hit {damage }
+            },
+            _ => AttackResult::Miss
         }
     }
 }
 
 fn main() {
-    let checker = unit::skill::build_checker(10);
+    let checker = unit::skill::build_checker(10, 5);
     let character0 = Character { fighting: 6, strength: 3 };
     let character1 = Character { fighting: 5, strength: 8 };
 
