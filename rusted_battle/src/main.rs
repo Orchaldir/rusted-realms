@@ -1,5 +1,7 @@
 mod unit;
 
+extern crate rand;
+
 use unit::skill::*;
 
 #[derive(Debug)]
@@ -16,7 +18,7 @@ enum AttackResult {
 
 impl Character {
 
-    fn attack(self, target: Character, checker: Checker) -> AttackResult {
+    fn attack<'a, T: rand::Rng>(self, target: Character, mut checker: Checker<T>) -> AttackResult {
         match checker.check(self.fighting, target.fighting) {
             CheckResult::Success {degree} => {
                 let damage = self.strength * degree as i32;
@@ -28,7 +30,8 @@ impl Character {
 }
 
 fn main() {
-    let checker = unit::skill::build_checker(10, 5);
+    let mut rng = rand::thread_rng();
+    let checker = unit::skill::build_checker(10, 5, &mut rng);
     let character0 = Character { fighting: 6, strength: 3 };
     let character1 = Character { fighting: 5, strength: 8 };
 
