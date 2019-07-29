@@ -1,8 +1,10 @@
-mod unit;
+pub mod unit;
+pub mod utils;
 
 extern crate rand;
 
 use unit::skill::*;
+use utils::dice_roller::DiceRoller;
 
 #[derive(Debug)]
 struct Character {
@@ -17,7 +19,7 @@ enum AttackResult {
 }
 
 impl Character {
-    fn attack<T: rand::Rng>(self, target: Character, mut checker: Checker<T>) -> AttackResult {
+    fn attack<T: DiceRoller>(self, target: Character, mut checker: Checker<T>) -> AttackResult {
         match checker.check(self.fighting, target.fighting) {
             CheckResult::Success { degree } => {
                 let damage = self.strength * degree as i32;
@@ -29,8 +31,8 @@ impl Character {
 }
 
 fn main() {
-    let mut rng = rand::thread_rng();
-    let checker = unit::skill::build_checker(10, 5, &mut rng);
+    let mut dice_roller = utils::dice_roller::MockDiceRoller::new(vec![8, 9]);
+    let checker = unit::skill::build_checker(10, 5, &mut dice_roller);
     let character0 = Character {
         fighting: 6,
         strength: 3,

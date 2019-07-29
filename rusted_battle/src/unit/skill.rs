@@ -1,10 +1,12 @@
 extern crate rand;
 
+use crate::utils::dice_roller::*;
+
 #[derive(Debug)]
-pub struct Checker<'a, T: rand::Rng> {
+pub struct Checker<'a, T: DiceRoller> {
     die_sides: u32,
     size_of_degree: u32,
-    rng: &'a mut T,
+    dice_roller: &'a mut T,
 }
 
 #[derive(Debug)]
@@ -15,11 +17,11 @@ pub enum CheckResult {
 
 impl<'a, T> Checker<'a, T>
 where
-    T: rand::Rng,
+    T: DiceRoller,
 {
     pub fn check(&mut self, skill: i32, difficulty: i32) -> CheckResult {
-        let positive_die = self.roll_die();
-        let negative_die = self.roll_die();
+        let positive_die = self.dice_roller.roll(self.die_sides) as i32;
+        let negative_die = self.dice_roller.roll(self.die_sides) as i32;
         let random_modifier = positive_die - negative_die;
         println!(
             "Roll d{0}-d{0}={1}-{2}={3}",
@@ -36,19 +38,15 @@ where
             CheckResult::Failure { degree }
         }
     }
-
-    fn roll_die(&mut self) -> i32 {
-        self.rng.gen_range(1, self.die_sides as i32 + 1)
-    }
 }
 
-pub fn build_checker<T>(die_sides: u32, size_of_degree: u32, rng: &mut T) -> Checker<T>
+pub fn build_checker<T>(die_sides: u32, size_of_degree: u32, dice_roller: &mut T) -> Checker<T>
 where
-    T: rand::Rng,
+    T: DiceRoller,
 {
     Checker {
         die_sides,
         size_of_degree,
-        rng,
+        dice_roller,
     }
 }
