@@ -1,28 +1,35 @@
+use std::cell::Cell;
+
 pub trait DiceRoller {
-    fn roll(&mut self, sides: u32) -> u32;
+    fn roll(&self, sides: u32) -> u32;
 }
 
 // MockDiceRoller
 
 pub struct MockDiceRoller {
     results: Vec<u32>,
-    index: usize,
+    index: Cell<usize>,
 }
 
 impl MockDiceRoller {
     pub fn new(results: Vec<u32>) -> MockDiceRoller {
-        MockDiceRoller { results, index: 0 }
+        MockDiceRoller {
+            results,
+            index: Cell::new(0),
+        }
     }
 }
 
 impl DiceRoller for MockDiceRoller {
-    fn roll(&mut self, _: u32) -> u32 {
-        if self.index < self.results.len() {
-            let result = self.results[self.index];
-            self.index += 1;
+    fn roll(&self, _: u32) -> u32 {
+        let current_index = self.index.get();
+
+        if current_index < self.results.len() {
+            let result = self.results[current_index];
+            self.index.set(current_index + 1);
             return result;
         }
 
-        panic!("Index {} is outside the result vector!", self.index);
+        panic!("Index {} is outside the result vector!", current_index);
     }
 }

@@ -6,7 +6,7 @@ use crate::utils::dice_roller::*;
 pub struct Checker<'a, T: DiceRoller> {
     die_sides: u32,
     size_of_degree: u32,
-    dice_roller: &'a mut T,
+    dice_roller: &'a T,
 }
 
 #[derive(Debug)]
@@ -19,7 +19,7 @@ impl<'a, T> Checker<'a, T>
 where
     T: DiceRoller,
 {
-    pub fn check(&mut self, skill: i32, difficulty: i32) -> CheckResult {
+    pub fn check(&self, skill: i32, difficulty: i32) -> CheckResult {
         let positive_die = self.dice_roller.roll(self.die_sides) as i32;
         let negative_die = self.dice_roller.roll(self.die_sides) as i32;
         let random_modifier = positive_die - negative_die;
@@ -40,7 +40,7 @@ where
     }
 }
 
-pub fn build_checker<T>(die_sides: u32, size_of_degree: u32, dice_roller: &mut T) -> Checker<T>
+pub fn build_checker<T>(die_sides: u32, size_of_degree: u32, dice_roller: &T) -> Checker<T>
 where
     T: DiceRoller,
 {

@@ -31,8 +31,8 @@ impl Character {
 }
 
 fn main() {
-    let mut dice_roller = utils::dice_roller::MockDiceRoller::new(vec![8, 9]);
-    let checker = unit::skill::build_checker(10, 5, &mut dice_roller);
+    let dice_roller = utils::dice_roller::MockDiceRoller::new(vec![8, 9]);
+    let checker = unit::skill::build_checker(10, 5, &dice_roller);
     let character0 = Character {
         fighting: 6,
         strength: 3,
