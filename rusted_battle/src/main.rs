@@ -19,7 +19,7 @@ enum AttackResult {
 }
 
 impl Character {
-    fn attack<T: DiceRoller>(self, target: Character, mut checker: Checker<T>) -> AttackResult {
+    fn attack<T: DiceRoller>(self, target: Character, checker: &Checker<T>) -> AttackResult {
         match checker.check(self.fighting, target.fighting) {
             CheckResult::Success { degree } => {
                 let damage = self.strength * degree as i32;
@@ -42,7 +42,7 @@ fn main() {
         strength: 8,
     };
 
-    let result = character0.attack(character1, checker);
+    let result = character0.attack(character1, &checker);
 
     match result {
         AttackResult::Hit { damage } => println!("A hit with {} damage!", damage),

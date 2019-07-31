@@ -20,16 +20,10 @@ where
     T: DiceRoller,
 {
     pub fn check(&self, skill: i32, difficulty: i32) -> CheckResult {
-        let positive_die = self.dice_roller.roll(self.die_sides) as i32;
-        let negative_die = self.dice_roller.roll(self.die_sides) as i32;
-        let random_modifier = positive_die - negative_die;
-        println!(
-            "Roll d{0}-d{0}={1}-{2}={3}",
-            self.die_sides, positive_die, negative_die, random_modifier
-        );
-
+        let random_modifier = self.dice_roller.roll_die_minus_die(self.die_sides);
         let diff = skill - difficulty + random_modifier;
         let degree = 1 + diff.abs() as u32 / self.size_of_degree;
+
         println!("diff={} degree={}", diff, degree);
 
         if diff >= 0 {
