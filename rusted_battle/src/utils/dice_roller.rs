@@ -2,7 +2,19 @@ use std::cell::Cell;
 
 pub trait DiceRoller {
     fn roll(&self, sides: u32) -> u32;
-    fn roll_die_minus_die(&self, sides: u32) -> i32;
+
+    fn roll_die_minus_die(&self, sides: u32) -> i32 {
+        let positive_die = self.roll(sides) as i32;
+        let negative_die = self.roll(sides) as i32;
+        let result = positive_die - negative_die;
+
+        println!(
+            "Roll d{0}-d{0}={1}-{2}={3}",
+            sides, positive_die, negative_die, result
+        );
+
+        result
+    }
 }
 
 // MockDiceRoller
@@ -33,17 +45,21 @@ impl DiceRoller for MockDiceRoller {
 
         panic!("Index {} is outside the result vector!", current_index);
     }
+}
 
-    fn roll_die_minus_die(&self, sides: u32) -> i32 {
-        let positive_die = self.roll(sides) as i32;
-        let negative_die = self.roll(sides) as i32;
-        let result = positive_die - negative_die;
+// RngDiceRoller
 
-        println!(
-            "Roll d{0}-d{0}={1}-{2}={3}",
-            sides, positive_die, negative_die, result
-        );
+pub struct RngDiceRoller {}
 
-        result
+impl RngDiceRoller {
+    pub fn new() -> RngDiceRoller {
+        RngDiceRoller {}
+    }
+}
+
+impl DiceRoller for RngDiceRoller {
+    fn roll(&self, sides: u32) -> u32 {
+        use rand::Rng;
+        rand::thread_rng().gen_range(1, sides + 1)
     }
 }

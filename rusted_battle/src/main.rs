@@ -31,7 +31,7 @@ impl Character {
 }
 
 fn main() {
-    let dice_roller = utils::dice_roller::MockDiceRoller::new(vec![8, 9]);
+    let dice_roller = utils::dice_roller::RngDiceRoller::new();
     let checker = unit::skill::build_checker(10, 5, &dice_roller);
     let character0 = Character {
         fighting: 6,
