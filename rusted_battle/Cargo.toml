@@ -6,3 +6,11 @@ edition = "2018"
 
 [dependencies]
 rand = "0.7.0"
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+[[bin]]
+name = "dice_probabilities"
+path = "src/dice_probabilities.rs"
