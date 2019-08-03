@@ -64,8 +64,108 @@
 
 === Weapons
 
-* ???
+.Blades
+|===
+|Name |Damage |Special
 
-=== Armor
+| Dagger
+| 1
+| Small
 
-* ???
+| Short Sword
+| 2
+|
+
+| Long Sword
+| 3
+|
+
+| Great Sword
+| 4
+| 2H
+|===
+
+
+.Axes
+|===
+|Name |Damage |Special
+
+| Hand Axe
+| 2
+|
+
+| Battle Axe
+| 3
+|
+
+| Great Axe
+| 4
+| 2H
+|===
+
+.Blunt Weapons
+|===
+|Name |Damage |Special
+
+| Brass Knuckles
+| 1
+| Small
+
+| Light Hammer
+| 2
+|
+
+| War Hammer
+| 3
+|
+
+| Great Hammer
+| 4
+| 2H
+|===
+
+=== Shields
+
+.Shields
+|===
+|Name |Protection |Special
+
+| Buckler
+| 1
+| Small
+
+| Shield
+| 2
+|
+
+| Tower Shield
+| 3
+|
+|===
+
+=== Armour
+
+.Amours
+|===
+|Name |Protection |Special
+
+| Cloth or Fur
+| 1
+|
+
+| Leather
+| 2
+|
+
+| Chain or Scale
+| 3
+|
+
+| Half-Plate
+| 4
+|
+
+| Plate
+| 5
+|
+|===
