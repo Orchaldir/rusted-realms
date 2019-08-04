@@ -31,6 +31,18 @@ impl MockDiceRoller {
             index: Cell::new(0),
         }
     }
+
+    pub fn for_two_rolls(positive_die: u32, negative_die: u32) -> MockDiceRoller {
+        MockDiceRoller::new(vec![positive_die, negative_die])
+    }
+
+    pub fn for_die_minus_die(result: i32) -> MockDiceRoller {
+        if result >= 0 {
+            MockDiceRoller::for_two_rolls(result as u32, 0)
+        } else {
+            MockDiceRoller::for_two_rolls(0, result.abs() as u32)
+        }
+    }
 }
 
 impl DiceRoller for MockDiceRoller {
