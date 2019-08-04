@@ -10,20 +10,73 @@
 
 === Ranks
 
-* average child
-* average teenager
-* average adult
-* above average
-* among the best in a village
-* among the best in a town
-* among the best in a city/province
-* among the best in a nation
-* among the best on a continent
-* among the best in the world
-* among the best ever
-* low supernatural
-* moderate supernatural
-* high supernatural
+[cols="1,2a,2a", options="header"]
+|===
+|Rank
+|Attribute
+|Skill
+
+| -2
+|average child
+|
+
+| -1
+| average teenager
+|
+
+| 0
+| average adult
+| untrained
+
+| 1
+| above average
+|
+* beginner
+* page
+* apprentice
+
+| 2
+| good
+|
+* intermediate
+* squire
+* journeyman
+
+| 3
+| great
+|
+* advanced
+* knight
+* master
+
+| 4
+| fantastic
+| experienced
+
+| 5
+2+| among the best in a city/province
+
+| 6
+2+| among the best in a nation
+
+| 7
+2+| among the best on a continent
+
+| 8
+2+| among the best in the world
+
+| 9
+2+| among the best ever
+
+| 10
+2+| low supernatural
+
+| 15
+2+| moderate supernatural
+
+| 20
+2+| high supernatural
+|===
 
 == Unit Types
 
