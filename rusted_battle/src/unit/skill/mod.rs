@@ -2,9 +2,15 @@ pub mod check;
 
 use std::collections::HashMap;
 
-#[derive(Debug)]
+#[derive(Debug, Eq, Hash, PartialEq)]
 pub struct Skill<'a> {
     name: &'a str,
+}
+
+impl<'a> Skill<'a> {
+    pub fn new(name: &'a str) -> Skill<'a> {
+        Skill { name }
+    }
 }
 
 #[derive(Debug)]
