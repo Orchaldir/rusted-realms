@@ -4,6 +4,7 @@ pub mod utils;
 extern crate rand;
 
 use unit::skill::check::*;
+use unit::skill::*;
 use utils::dice_roller::DiceRoller;
 
 #[derive(Debug)]
@@ -33,6 +34,11 @@ impl Character {
 fn main() {
     let dice_roller = utils::dice_roller::RngDiceRoller::new();
     let checker = build_checker(10, 5, &dice_roller);
+    let mut skill_manager = SkillManager::new();
+
+    skill_manager.create("Fighting");
+    skill_manager.create("Strength");
+
     let character0 = Character {
         fighting: 6,
         strength: 3,
