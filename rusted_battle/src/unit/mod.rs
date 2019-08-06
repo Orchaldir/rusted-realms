@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+pub mod health;
 pub mod skill;
 
 #[derive(Debug)]
