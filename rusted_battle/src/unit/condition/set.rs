@@ -29,13 +29,10 @@ where
     }
 
     pub fn get_skill_modifier(&self, skill: &Skill) -> i32 {
-        let mut modifier = 0;
-
-        for &condition in self.conditions.iter() {
-            modifier += condition.get_skill_modifier(skill);
-        }
-
-        modifier
+        self.conditions
+            .iter()
+            .map(|c| c.get_skill_modifier(&skill))
+            .sum()
     }
 }
 
@@ -56,6 +53,7 @@ mod tests {
         let skill_a = Skill::new("a");
         let condition_a = SkillModifier::new(&skill_a, 2);
         let mut skill_set = ConditionSet::new();
+
         skill_set.add(&condition_a);
 
         assert_eq!(skill_set.get_skill_modifier(&skill_a), 2);
@@ -68,6 +66,7 @@ mod tests {
         let condition_a = SkillModifier::new(&skill_a, 3);
         let condition_b = SkillModifier::new(&skill_b, -4);
         let mut skill_set = ConditionSet::new();
+
         skill_set.add(&condition_a);
         skill_set.add(&condition_b);
 
@@ -81,9 +80,24 @@ mod tests {
         let condition_a = SkillModifier::new(&skill_a, 3);
         let condition_b = SkillModifier::new(&skill_a, -4);
         let mut skill_set = ConditionSet::new();
+
         skill_set.add(&condition_a);
         skill_set.add(&condition_b);
 
         assert_eq!(skill_set.get_skill_modifier(&skill_a), -1);
+    }
+
+    #[test]
+    fn test_remove() {
+        let skill_a = Skill::new("a");
+        let condition_a = SkillModifier::new(&skill_a, 3);
+        let condition_b = SkillModifier::new(&skill_a, -4);
+        let mut skill_set = ConditionSet::new();
+
+        skill_set.add(&condition_a);
+        skill_set.add(&condition_b);
+        skill_set.remove(&condition_b);
+
+        assert_eq!(skill_set.get_skill_modifier(&skill_a), 3);
     }
 }
