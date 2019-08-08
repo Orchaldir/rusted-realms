@@ -1,0 +1,19 @@
+@startuml
+
+interface Action
+class Skill
+class SkillSet
+class Unit
+
+
+Action <|-- UseEffect
+Action <|-- Movement
+ConditionSet o-- "0..*" Condition
+Unit *-- ConditionSet
+Unit *-- "0..*" Action
+Unit *-- SkillSet
+SkillSet o-- "0..*" Skill
+
+hide members
+
+@enduml

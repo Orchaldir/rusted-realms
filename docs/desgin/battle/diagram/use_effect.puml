@@ -1,0 +1,24 @@
+@startuml
+
+class UseEffect
+interface Effect
+class StatModifier
+interface Target
+
+ Effect --* UseEffect
+Damage --|> Effect
+Healing --|> Effect
+StatModifier --|> Effect
+ChangeTerrain --|> Effect
+
+UseEffect *-- Target
+Target <|-- Self
+Target <|-- Melee
+Target <|-- Ranged
+Target <|-- Perception
+Target <|-- Cone
+Target <|-- Area
+
+hide members
+
+@enduml
