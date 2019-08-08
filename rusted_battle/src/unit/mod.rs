@@ -1,5 +1,6 @@
 use crate::unit::skill::set::SkillSet;
 
+pub mod condition;
 pub mod health;
 pub mod skill;
 
