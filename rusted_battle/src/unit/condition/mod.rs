@@ -1,3 +1,5 @@
+pub mod set;
+
 use crate::unit::skill::Skill;
 
 pub trait Condition {
@@ -8,6 +10,7 @@ pub trait Condition {
 
 //
 
+#[derive(Eq, Hash, PartialEq)]
 pub struct SkillModifier<'a> {
     skill: &'a Skill<'a>,
     modifier: i32,
