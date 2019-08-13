@@ -39,6 +39,7 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::unit::condition::skill_modifier::SkillModifier;
 
     #[test]
     fn test_no_condition() {
