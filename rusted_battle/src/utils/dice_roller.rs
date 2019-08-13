@@ -1,9 +1,55 @@
 use std::cell::Cell;
 
-pub trait DiceRoller {
-    fn roll(&self, sides: u32) -> u32;
+#[derive(Debug)]
+pub enum DiceRoller {
+    Mocked {
+        results: Vec<u32>,
+        index: Cell<usize>,
+    },
+    Random,
+}
 
-    fn roll_die_minus_die(&self, sides: u32) -> i32 {
+impl DiceRoller {
+    pub fn mock(results: Vec<u32>) -> DiceRoller {
+        DiceRoller::Mocked {
+            results,
+            index: Cell::new(0),
+        }
+    }
+
+    pub fn mock_two_rolls(positive_die: u32, negative_die: u32) -> DiceRoller {
+        DiceRoller::mock(vec![positive_die, negative_die])
+    }
+
+    pub fn mock_die_minus_die(result: i32) -> DiceRoller {
+        if result >= 0 {
+            DiceRoller::mock_two_rolls(result as u32, 0)
+        } else {
+            DiceRoller::mock_two_rolls(0, result.abs() as u32)
+        }
+    }
+
+    pub fn roll(&self, sides: u32) -> u32 {
+        match self {
+            DiceRoller::Mocked { results, index } => {
+                let current_index = index.get();
+
+                if current_index < results.len() {
+                    let result = results[current_index];
+                    index.set(current_index + 1);
+                    return result;
+                }
+
+                panic!("Index {} is outside the result vector!", current_index);
+            }
+            DiceRoller::Random => {
+                use rand::Rng;
+                rand::thread_rng().gen_range(1, sides + 1)
+            }
+        }
+    }
+
+    pub fn roll_die_minus_die(&self, sides: u32) -> i32 {
         let positive_die = self.roll(sides) as i32;
         let negative_die = self.roll(sides) as i32;
         let result = positive_die - negative_die;
@@ -14,64 +60,5 @@ pub trait DiceRoller {
         );
 
         result
-    }
-}
-
-// MockDiceRoller
-
-pub struct MockDiceRoller {
-    results: Vec<u32>,
-    index: Cell<usize>,
-}
-
-impl MockDiceRoller {
-    pub fn new(results: Vec<u32>) -> MockDiceRoller {
-        MockDiceRoller {
-            results,
-            index: Cell::new(0),
-        }
-    }
-
-    pub fn for_two_rolls(positive_die: u32, negative_die: u32) -> MockDiceRoller {
-        MockDiceRoller::new(vec![positive_die, negative_die])
-    }
-
-    pub fn for_die_minus_die(result: i32) -> MockDiceRoller {
-        if result >= 0 {
-            MockDiceRoller::for_two_rolls(result as u32, 0)
-        } else {
-            MockDiceRoller::for_two_rolls(0, result.abs() as u32)
-        }
-    }
-}
-
-impl DiceRoller for MockDiceRoller {
-    fn roll(&self, _: u32) -> u32 {
-        let current_index = self.index.get();
-
-        if current_index < self.results.len() {
-            let result = self.results[current_index];
-            self.index.set(current_index + 1);
-            return result;
-        }
-
-        panic!("Index {} is outside the result vector!", current_index);
-    }
-}
-
-// RngDiceRoller
-
-pub struct RngDiceRoller {}
-
-impl RngDiceRoller {
-    pub fn new() -> RngDiceRoller {
-        RngDiceRoller {}
-    }
-}
-
-impl DiceRoller for RngDiceRoller {
-    fn roll(&self, sides: u32) -> u32 {
-        use rand::Rng;
-        rand::thread_rng().gen_range(1, sides + 1)
     }
 }

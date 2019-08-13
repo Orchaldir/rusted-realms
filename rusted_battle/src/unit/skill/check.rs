@@ -3,10 +3,10 @@ extern crate rand;
 use crate::utils::dice_roller::*;
 
 #[derive(Debug)]
-pub struct Checker<'a, T: DiceRoller> {
+pub struct Checker<'a> {
     die_sides: u32,
     size_of_degree: u32,
-    dice_roller: &'a T,
+    dice_roller: &'a DiceRoller,
 }
 
 #[derive(Debug)]
@@ -15,10 +15,7 @@ pub enum CheckResult {
     Failure { degree: u32 },
 }
 
-impl<'a, T> Checker<'a, T>
-where
-    T: DiceRoller,
-{
+impl<'a> Checker<'a> {
     pub fn check(&self, skill: i32, difficulty: i32) -> CheckResult {
         let random_modifier = self.dice_roller.roll_die_minus_die(self.die_sides);
         let diff = skill - difficulty + random_modifier;
@@ -34,10 +31,7 @@ where
     }
 }
 
-pub fn build_checker<T>(die_sides: u32, size_of_degree: u32, dice_roller: &T) -> Checker<T>
-where
-    T: DiceRoller,
-{
+pub fn build_checker(die_sides: u32, size_of_degree: u32, dice_roller: &DiceRoller) -> Checker {
     Checker {
         die_sides,
         size_of_degree,
@@ -48,10 +42,10 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::utils::dice_roller::MockDiceRoller;
+    use crate::utils::dice_roller::DiceRoller;
 
     fn assert_success(roll_result: i32, skill: i32, difficulty: i32, expected: u32) {
-        let roller = MockDiceRoller::for_die_minus_die(roll_result);
+        let roller = DiceRoller::mock_die_minus_die(roll_result);
         let checker = build_checker(6, 3, &roller);
 
         match checker.check(skill, difficulty) {
@@ -63,7 +57,7 @@ mod tests {
     }
 
     fn assert_failure(roll_result: i32, skill: i32, difficulty: i32, expected: u32) {
-        let roller = MockDiceRoller::for_die_minus_die(roll_result);
+        let roller = DiceRoller::mock_die_minus_die(roll_result);
         let checker = build_checker(6, 3, &roller);
 
         match checker.check(skill, difficulty) {
