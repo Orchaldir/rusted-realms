@@ -1,33 +1,28 @@
 use super::*;
+use std::collections::HashMap;
 
 pub struct ConditionSet<'a> {
-    conditions: Vec<&'a dyn Condition>,
+    conditions: HashMap<&'a str, &'a dyn Condition>,
 }
 
 impl<'a> ConditionSet<'a> {
     pub fn new() -> ConditionSet<'a> {
         ConditionSet {
-            conditions: Vec::new(),
+            conditions: HashMap::new(),
         }
     }
 
     pub fn add(&mut self, condition: &'a dyn Condition) {
-        self.conditions.push(condition);
+        self.conditions.insert(condition.get_id(), condition);
     }
 
     pub fn remove(&mut self, condition: &'a dyn Condition) {
-        let index = self
-            .conditions
-            .iter()
-            .position(|x| x.get_id() == condition.get_id())
-            .unwrap();
-
-        self.conditions.remove(index);
+        self.conditions.remove(condition.get_id());
     }
 
     pub fn get_skill_modifier(&self, skill: &Skill) -> i32 {
         self.conditions
-            .iter()
+            .values()
             .map(|c| c.get_skill_modifier(&skill))
             .sum()
     }
@@ -53,6 +48,18 @@ mod tests {
         let condition_a = SkillModifier::new("cond_a", &skill_a, 2);
 
         let mut skill_set = ConditionSet::new();
+        skill_set.add(&condition_a);
+
+        assert_eq!(skill_set.get_skill_modifier(&skill_a), 2);
+    }
+
+    #[test]
+    fn test_twice() {
+        let skill_a = Skill::new("a");
+        let condition_a = SkillModifier::new("cond_a", &skill_a, 2);
+
+        let mut skill_set = ConditionSet::new();
+        skill_set.add(&condition_a);
         skill_set.add(&condition_a);
 
         assert_eq!(skill_set.get_skill_modifier(&skill_a), 2);
