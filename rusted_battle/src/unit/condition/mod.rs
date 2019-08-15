@@ -5,7 +5,9 @@ pub mod skill_modifier;
 use crate::unit::skill::Skill;
 
 pub trait Condition {
-    fn get_skill_modifier(&self, skill: &Skill) -> i32 {
+    fn get_id(&self) -> &str;
+
+    fn get_skill_modifier(&self, _skill: &Skill) -> i32 {
         0
     }
 }

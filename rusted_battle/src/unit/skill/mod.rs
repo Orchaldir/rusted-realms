@@ -73,7 +73,7 @@ mod tests {
     #[test]
     #[should_panic(expected = "Skill 'c' does not exist!")]
     fn test_get_not_existing_skill() {
-        let mut skill_manager = SkillManager::new();
+        let skill_manager = SkillManager::new();
 
         skill_manager.get("c");
     }
