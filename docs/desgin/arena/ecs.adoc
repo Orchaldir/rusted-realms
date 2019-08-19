@@ -1,0 +1,57 @@
+= Entity Component System
+
+== Other classes
+
+* Action & Manager
+* Damage
+* Skill & Manager
+
+== Components
+
+* Combat
+** actions
+* Health
+** penalty
+** is alive?
+* Stats
+** skills
+** conditions
+
+== Events
+
+* Attacked
+** target id
+** attacker id
+** attack id
+* Hit
+** target id
+** attacker id
+** damage
+* Killed
+** entity id
+** killer id
+
+== Systems
+
+* Arena
+** player selects actions for each alive entity
+** subscribes to Killed
+* Combat
+** subscribes to Attacked
+** publishes Hit
+* Health
+** subscribes to Hit
+** publishes Killed
+
+== Modules
+
+* game
+** condition
+** damage
+** skill
+* ecs
+** component
+** event
+** system
+* utils
+** dice roller
