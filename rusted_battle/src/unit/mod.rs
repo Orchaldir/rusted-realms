@@ -32,7 +32,6 @@ impl<'a> Unit<'a> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::unit::condition::modifier::Modifier;
     use crate::unit::condition::skill_modifier::SkillModifier;
 
     #[test]
