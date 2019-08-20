@@ -1,5 +1,5 @@
-use crate::unit::condition::Condition;
-use crate::unit::skill::Skill;
+use crate::game::rpg::unit::condition::Condition;
+use crate::game::rpg::unit::skill::Skill;
 
 #[derive(Debug, Eq, Hash, PartialEq)]
 pub struct Modifier<'a> {

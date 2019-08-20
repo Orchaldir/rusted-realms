@@ -2,7 +2,7 @@ pub mod modifier;
 pub mod set;
 pub mod skill_modifier;
 
-use crate::unit::skill::Skill;
+use crate::game::rpg::unit::skill::Skill;
 
 pub trait Condition {
     fn get_id(&self) -> &str;

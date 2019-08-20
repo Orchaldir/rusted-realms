@@ -1,11 +1,10 @@
 pub mod game;
-pub mod unit;
 pub mod utils;
 
 extern crate rand;
 
-use unit::skill::check::*;
-use unit::skill::*;
+use game::rpg::unit::skill::check::*;
+use game::rpg::unit::skill::*;
 
 #[derive(Debug)]
 struct Character {

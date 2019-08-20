@@ -13,7 +13,7 @@
 * Health
 ** penalty
 ** is alive?
-* Stats
+* Statistics
 ** skills
 ** conditions
 

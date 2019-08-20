@@ -1,6 +1,6 @@
-use crate::unit::condition::set::ConditionSet;
-use crate::unit::skill::set::SkillSet;
-use crate::unit::skill::Skill;
+use crate::game::rpg::unit::condition::set::ConditionSet;
+use crate::game::rpg::unit::skill::set::SkillSet;
+use crate::game::rpg::unit::skill::Skill;
 
 pub struct StatisticsComponent<'a> {
     skills: SkillSet<'a>,
@@ -26,7 +26,7 @@ impl<'a> StatisticsComponent<'a> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::unit::condition::skill_modifier::SkillModifier;
+    use crate::game::rpg::unit::condition::skill_modifier::SkillModifier;
 
     #[test]
     fn test_get_skill_rank() {
