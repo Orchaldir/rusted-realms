@@ -22,6 +22,10 @@ impl<T> ComponentManager<T> {
     pub fn get(&self, entity: u32) -> Option<&T> {
         self.components.get(&entity)
     }
+
+    pub fn get_mut(&mut self, entity: u32) -> Option<&mut T> {
+        self.components.get_mut(&entity)
+    }
 }
 
 #[cfg(test)]
