@@ -6,13 +6,13 @@ pub trait EventListener<T> {
     fn update(&mut self, event: &T);
 }
 
-pub struct EventManager<T> {
+pub struct EventPublisher<T> {
     listeners: Vec<Rc<RefCell<dyn EventListener<T>>>>,
 }
 
-impl<T> EventManager<T> {
-    pub fn new() -> EventManager<T> {
-        EventManager {
+impl<T> EventPublisher<T> {
+    pub fn new() -> EventPublisher<T> {
+        EventPublisher {
             listeners: Vec::new(),
         }
     }
@@ -21,7 +21,7 @@ impl<T> EventManager<T> {
         self.listeners.push(listener);
     }
 
-    pub fn publish(&mut self, event: &T) {
+    pub fn publish(&self, event: &T) {
         for l in self.listeners.iter() {
             let cell: &RefCell<dyn EventListener<T>> = l.borrow();
             (*cell.borrow_mut()).update(event);
@@ -52,10 +52,10 @@ mod tests {
         let event = MockEvent { data: 55 };
         let listener = Rc::new(RefCell::new(MockListener { data: 0 }));
 
-        let mut manager = EventManager::new();
-        manager.add(listener.clone());
+        let mut publisher = EventPublisher::new();
+        publisher.add(listener.clone());
 
-        manager.publish(&event);
+        publisher.publish(&event);
 
         let cell: &RefCell<MockListener> = listener.borrow();
         let l = cell.borrow().data;
